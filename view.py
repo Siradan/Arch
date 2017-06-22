@@ -9,23 +9,29 @@ class View:
         read code from input and return code index
         """
         get = input('Command: ').strip()
-        list = ['show', 'calc', 'write', 'help', 'exit']
+        list = ['show',
+                'calc',
+                'write',
+                'help',
+                'exit',
+                'sort 0',
+                'sort 1',
+                'sort 2',
+                'sort 3']
         if get in list:
             return list.index(get)
         else:
             return 5
 
-    def show_db(self, list):
+    def show_db(self, iterator):
         """
         Display the list of products from LIST variable.
         """
         print ('Calories table:')
-        for index, element in enumerate(list, 1):
-            buffer_0 = str(index).ljust(3)
-            buffer_0 += element.get('name').ljust(25)
-            buffer_0 += str(element.get('val'))
-
-            print(buffer_0)
+        for index, element in enumerate(iterator, 1):
+            print(str(index).ljust(3),
+                  element.get('name').ljust(25),
+                  str(element.get('val')))
 
     def input(self):
         """
@@ -49,9 +55,14 @@ class View:
         """
         Print tutorial.
         """
+        print('"help": Print tutorial')
         print('"show": Show table of items with names and calories per gram')
         print('"calc": Calculate calories')
         print('"write": Add new item to table')
+        print('"sort 0": Ascending sort of items by value')
+        print('"sort 1": Decreasing sort of items by value')
+        print('"sort 2": Ascending sort of items by name')
+        print('"sort 3": Decreasing sort of items by name')
         print('"exit": Close program')
 
     def error(self):

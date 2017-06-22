@@ -68,7 +68,7 @@ class PickleSerialize(AbstractSerializer):
         call base load method with parameters
         """
         try:
-            return PickleSerialize\
+            return PickleSerialize \
                 .base_load(path_to_file, pickle.load, '.pickle', 'rb')
         except:
             return []
