@@ -9,15 +9,7 @@ class View:
         read code from input and return code index
         """
         get = input('Command: ').strip()
-        list = ['show',
-                'calc',
-                'write',
-                'help',
-                'exit',
-                'sort 0',
-                'sort 1',
-                'sort 2',
-                'sort 3']
+        list = ['show', 'calc', 'write', 'help', 'exit', 'sort 0', 'sort 1', 'sort 2', 'sort 3']
         if get in list:
             return list.index(get)
         else:
@@ -29,9 +21,7 @@ class View:
         """
         print ('Calories table:')
         for index, element in enumerate(iterator, 1):
-            print(str(index).ljust(3),
-                  element.get('name').ljust(25),
-                  str(element.get('val')))
+            print(str(index).ljust(3), element.get('name').ljust(25), str(element.get('val')))
 
     def input(self):
         """

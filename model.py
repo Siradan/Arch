@@ -12,13 +12,12 @@ class Model:
         """
         self._serializer = Serialize(serializer)
         self.sorted = Sorted()
-        self.database = None
 
     def __iter__(self):
         """
         Return iterator for database
         """
-        return Iterator(self.database, self.sorted.get_order())
+        return Iterator(self.database, self.sorted.getOrder())
 
     def load(self, filename):
         """
@@ -34,14 +33,14 @@ class Model:
         self._serializer.save(filename, self.database)
 
     def sort(self, flag):
-        if flag == 0:
-            self.sorted.sort_by_val_top(self.database)
-        elif flag == 1:
-            self.sorted.sort_by_val_bottom(self.database)
-        elif flag == 2:
-            self.sorted.sort_by_name_top(self.database)
-        elif flag == 3:
-            self.sorted.sort_by_name_bottom(self.database)
+        if (flag == 0):
+            self.sorted.sortByValTop(self.database)
+        elif (flag == 1):
+            self.sorted.sortByValBottom(self.database)
+        elif (flag == 2):
+            self.sorted.sortByNameTop(self.database)
+        elif (flag == 3):
+            self.sorted.sortByNameBottom(self.database)
 
     def return_db(self):
         """
@@ -66,12 +65,16 @@ class Model:
         try to write new item into database
         """
         if [d for d in self.database if d['name'] == val[0]]:
-            self.database.remove([d for d in self.database if
-                                  d['name'] == val[0]][0])
+            self.database.remove([d for d in self.database if d['name'] == val[0]][0])
 
         self.database.append({'name': val[0], 'val': val[1]})
         self.sorted = Sorted(self.database)
+        return len(self.sorted.getOrder())
 
+    def clear(self):
+        """
+        """
+        self.database = []
 
 class Iterator:
     """
@@ -87,9 +90,9 @@ class Iterator:
         return self
 
     def __next__(self):
-        if self.i < len(self.order):
+        if (self.i < len(self.order)):
             res = self.current
-            if self.i + 1 < len(self.order):
+            if (self.i + 1 < len(self.order)):
                 self.current = self.list[self.order[self.i + 1]]
             self.i += 1
             return res
@@ -101,7 +104,7 @@ class Format:
     """
     Class for transform strings to lists
     """
-    def line_to_list(self, s):
+    def LineToList(self, s):
         """
         Format input string from console to list
         """
@@ -115,79 +118,78 @@ class Sorted:
     """
     Sorting list
     """
-    def __init__(self, list=None):
-        if list is None:
-            list = []
+    def __init__(self, list = []):
         self.order = []
         for i in enumerate(list):
             self.order.append(i[0])
 
-    def get_order(self):
+    def getOrder(self):
         """
         Return order of sorted elements
         """
         return self.order
 
-    def sort_by_val_top(self, list):
+    def sortByValTop(self, list):
         """
         Ascending sort list's elements by val ascending
         """
         self.order = []
         for i, elem in enumerate(list):
             j = 0
-            while j < len(self.order):
-                if int(elem['val']) > int(list[self.order[j]]['val']):
+            while (j < len(self.order)):
+                if (int(elem['val']) > int(list[self.order[j]]['val'])):
                     self.order.insert(j, i)
                     break
 
                 j += 1
-            if j == len(self.order):
+            if (j == len(self.order)):
                 self.order.append(i)
 
-    def sort_by_val_bottom(self, list):
+    def sortByValBottom(self, list):
         """
         Decreasing sort list's elements by val ascending
         """
         self.order = []
         for i, elem in enumerate(list):
             j = 0
-            while j < len(self.order):
-                if int(elem['val']) < int(list[self.order[j]]['val']):
+            while (j < len(self.order)):
+                if (int(elem['val']) < int(list[self.order[j]]['val'])):
                     self.order.insert(j, i)
                     break
 
                 j += 1
-            if j == len(self.order):
+            if (j == len(self.order)):
                 self.order.append(i)
 
-    def sort_by_name_top(self, list):
+    def sortByNameTop(self, list):
         """
         Ascending sort list's elements by name ascending
         """
         self.order = []
         for i, elem in enumerate(list):
             j = 0
-            while j < len(self.order):
-                if elem['name'] < list[self.order[j]]['name']:
+            while (j < len(self.order)):
+                if (elem['name'] < list[self.order[j]]['name']):
                     self.order.insert(j, i)
                     break
 
                 j += 1
-            if j == len(self.order):
+            if (j == len(self.order)):
                 self.order.append(i)
 
-    def sort_by_name_bottom(self, list):
+    def sortByNameBottom(self, list):
         """
         Decreasing sort list's elements by name ascending
         """
         self.order = []
         for i, elem in enumerate(list):
             j = 0
-            while j < len(self.order):
-                if elem['name'] > list[self.order[j]]['name']:
+            while (j < len(self.order)):
+                if (elem['name'] > list[self.order[j]]['name']):
                     self.order.insert(j, i)
                     break
 
                 j += 1
-            if j == len(self.order):
+            if (j == len(self.order)):
                 self.order.append(i)
+

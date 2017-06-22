@@ -37,7 +37,7 @@ class Controller:
                 self.view.show_db(iter(self.model))
             elif command == 1:
                 s = self.view.input().split()
-                res = self.model.count(self.format.line_to_list(s))
+                res = self.model.count(self.format.LineToList(s))
                 if isinstance(res, str):
                     self.view.notfound(res)
                 else:
